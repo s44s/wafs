@@ -20,16 +20,17 @@ In this course we are going to develop a singe page web app with native JavaScri
 ***
 
 ## Advantages and disadvantages of client-side single page web apps
-A single-page application is a web application that interacts with the user by dynamically rewriting the current page rather than loading entire new pages from a server.[4] This means that our website will run client side, the web browser of the user. Below some pros and cons about this way of building an application.
+A single-page application is a web application that interacts with the user by dynamically rewriting the current page rather than loading entire new pages from a server.[4] This means that our website will run client side, the web browser of the user. The script runs on your computer after you've loaded a webpage. Below some pros and cons about this way of building an application. SPAs are all about serving an outstanding UX by trying to imitate a “natural” environment in the browser – no page reloads, no extra waiting time. It is just one web page that you visit which then loads all other content using JavaScript – which they heavily depend on.[8]
 
 #### Pros
-* Only the elements that were changed will be reloaded. This is good for the server, not too many things are loaded.
+* Only the elements that were changed will be reloaded. This is good for the server, not too many things are loaded. The document is already at the client side.
 * Clear line between Front-end and Back-end. [5]
+* Easy to test and work on, no server needed. You can work on it locally.
 
 #### Cons
-* Het traditionele internetverkeer is helemaal afgestemd op de multi page variant. Dat zie je onder andere terugkomen bij de zoekmachines: deze gaan nog uit van de traditionele herladende pagina’s en zo crawlen zij dan ook voornamelijk de door hun bezochte websites. Van Google is inmiddels bekend dat ze redelijk goed kunnen omgaan met SPA's. Mits de SPA goed is opgezet, en alle links netjes gebruik maken van een eigen URL, wordt je website gewoon gespiderd. [5]
-* Omdat een SPA, in tegenstelling tot volledig herladende pagina’s, continue ‘open’ blijft staan, moet je als ontwikkelaar plots ook weer gaan letten op geheugengebruik. Het geheugen kan vollopen, want dit wordt niet bij elke nieuwe pagina weer geleegd. [5]
-* https://www.uxpin.com/studio/blog/single-page-vs-multi-page-ui-design-pros-cons/
+* Your user needs to enable JavaScript in their browser.
+* Careful thought must be put into search engine optimization (SEO) so your content can be discoverable by search engines and social media websites that provide a link preview.[7]
+* The browser does most of the heavy lifting, which means performance can be a problem — especially on less capable mobile devices.[7]
 
 ***
 
@@ -38,9 +39,11 @@ A single-page application is a web application that interacts with the user by d
 ***
 
 ## Resources
-[1](https://www.noupe.com/development/javascript-frameworks-94897.html)
-[2](https://learntocodewith.me/posts/javascript-libraries-frameworks/)
-[3](https://www.quora.com/What-are-the-pros-and-cons-of-JavaScript-frameworks)
-[4](https://en.wikipedia.org/wiki/Single-page_application)
-[5](https://www.oberon.nl/whitepapers/single-page-applications)
-[6](https://www.uxpin.com/studio/blog/single-page-vs-multi-page-ui-design-pros-cons/)
+[1 - JavaScript Frameworks: To Use or Not To Use?](https://www.noupe.com/development/javascript-frameworks-94897.html)
+[2 - 10 JAVASCRIPT LIBRARIES AND FRAMEWORKS YOU SHOULD KNOW ABOUT](https://learntocodewith.me/posts/javascript-libraries-frameworks/)
+[3 - What are the pros and cons of JavaScript frameworks?](https://www.quora.com/What-are-the-pros-and-cons-of-JavaScript-frameworks)
+[4 - Single-page application](https://en.wikipedia.org/wiki/Single-page_application)
+[5 - Single Page Applications](https://www.oberon.nl/whitepapers/single-page-applications)
+[6 - Single-Page vs. Multi-page UI Design: Pros & Cons](https://www.uxpin.com/studio/blog/single-page-vs-multi-page-ui-design-pros-cons/)
+[7 - Single page Applications ](https://www.codeschool.com/beginners-guide-to-web-development/single-page-applications)
+[8 - Single-page application vs. multiple-page application](https://neoteric.eu/single-page-application-vs-multiple-page-application)
