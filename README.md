@@ -40,10 +40,17 @@ A single-page application is a web application that interacts with the user by d
 
 ## Resources
 [1 - JavaScript Frameworks: To Use or Not To Use?](https://www.noupe.com/development/javascript-frameworks-94897.html)
+
 [2 - 10 JAVASCRIPT LIBRARIES AND FRAMEWORKS YOU SHOULD KNOW ABOUT](https://learntocodewith.me/posts/javascript-libraries-frameworks/)
+
 [3 - What are the pros and cons of JavaScript frameworks?](https://www.quora.com/What-are-the-pros-and-cons-of-JavaScript-frameworks)
+
 [4 - Single-page application](https://en.wikipedia.org/wiki/Single-page_application)
+
 [5 - Single Page Applications](https://www.oberon.nl/whitepapers/single-page-applications)
+
 [6 - Single-Page vs. Multi-page UI Design: Pros & Cons](https://www.uxpin.com/studio/blog/single-page-vs-multi-page-ui-design-pros-cons/)
+
 [7 - Single page Applications ](https://www.codeschool.com/beginners-guide-to-web-development/single-page-applications)
+
 [8 - Single-page application vs. multiple-page application](https://neoteric.eu/single-page-application-vs-multiple-page-application)
