@@ -35,6 +35,14 @@ A single-page application is a web application that interacts with the user by d
 ***
 
 ## Best practices
+* Don't use global variables/objects
+* Declare variables at top of scope
+* Use short clear meaningful names (English)
+* Work in strict mode
+* camelCase your code if(code != Constructor || CONSTANTS)
+* Place external scripts at the bottom of the page
+* Indent your code
+* Commit often & push once
 
 ***
 

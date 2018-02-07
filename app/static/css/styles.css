@@ -1,0 +1,23 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+section {
+	display: none;
+	width: 90vw;
+	height: 90vh;
+	margin-left: 5vw;
+}
+
+section:first-of-type {
+	background-color: darkgrey;
+}
+
+section:last-of-type {
+	background-color: grey;
+}
+
+.active {
+	display: block;
+}
