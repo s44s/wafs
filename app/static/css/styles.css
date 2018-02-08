@@ -3,19 +3,79 @@
 	padding: 0;
 }
 
+/* header nav */
+header nav ul {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+header nav ul li {
+	height: 5vh;
+	width: 30vw;
+	padding-top: 2.5vh;
+	font-family: helvetica;
+	font-weight: bold;
+	text-transform: uppercase;
+	text-align: center;
+	list-style: none;
+	border: 0.2em black solid;
+}
+
+header nav ul li:hover, header nav ul li:focus {
+	border: 0.2em orange solid;
+}
+
+header nav ul li a {
+	text-decoration: none;
+	color: black;
+}
+
+/* section .active */
 section {
 	display: none;
 	width: 90vw;
-	height: 90vh;
+	height: 80vh;
 	margin-left: 5vw;
+	margin-top: 5vw;
+	border: 0.2em black solid;
 }
 
-section:first-of-type {
-	background-color: darkgrey;
+section h1 {
+	font-family: helvetica;
+	text-align: center;
+	margin-top: 5vh;
 }
 
-section:last-of-type {
-	background-color: grey;
+section img {
+	width: 80vw;
+	margin-left: 5vw;
+	margin-top: 5vh;
+}
+
+section li {
+	width: 80vw;
+	font-family: helvetica;
+	margin-left: 5vw;
+	margin-top: 5vh;
+	text-align: center;
+	list-style: none;
+}
+
+@media screen and (min-width: 50em) {
+	section {
+		width: 70vw;
+		height: 80vh;
+		margin-left: 15vw;
+	}
+
+	section img {
+		width: 60vw;
+	}
+
+	section li {
+		width: 60vw;
+	}
 }
 
 .active {

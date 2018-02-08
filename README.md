@@ -1,6 +1,9 @@
 # minor-webdev-wafs
 The repo for the course 'Web App From Scratch'
 
+##
+In the folder 'app' you can find the basic code for a single page web app. Website is live on: [https://s44s.github.io/wafs/app/](https://s44s.github.io/wafs/app/)
+
 ## Advantages and disadvantages of JavaScript libraries/frameworks
 In this course we are going to develop a singe page web app with native JavaScript. So no use of jQuery, React or other libraries and/or frameworks. Learn the actual underlying technologies, before learning abstractions. I have listed some pros and cons of using JavaScript libraries;
 
@@ -62,3 +65,7 @@ A single-page application is a web application that interacts with the user by d
 [7 - Single page Applications ](https://www.codeschool.com/beginners-guide-to-web-development/single-page-applications)
 
 [8 - Single-page application vs. multiple-page application](https://neoteric.eu/single-page-application-vs-multiple-page-application)
+
+***
+
+by [suus](https://github.com/s44s)
