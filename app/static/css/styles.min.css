@@ -1,0 +1,31 @@
+#container {
+  display: grid;
+}
+
+#container h1 {
+  text-align: center;
+}
+
+#container .hidden {
+  display: none;
+}
+
+#container nav {
+  position  : absolute;
+  bottom    : 0;
+  box-sizing: border-box;
+  width     : 100%;
+  padding   : 1em;
+}
+
+#container nav ul {
+  display              : grid;
+  margin               : 0;
+  padding              : 0;
+  grid-template-columns: 1fr 1fr;
+}
+
+#container nav ul li {
+  list-style-type: none;
+  text-align     : center;
+}

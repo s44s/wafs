@@ -1,0 +1,22 @@
+#container{
+	display: grid;
+
+	h1{
+		text-align: center;
+	}
+
+
+	.hidden{
+		display: none;
+	}
+
+	nav{
+		position: absolute; bottom: 0; width: 100%; padding: 1em; box-sizing: border-box;
+		ul{
+			padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr;
+			li{
+				list-style-type: none; text-align: center;
+			}
+		}
+	}
+}
