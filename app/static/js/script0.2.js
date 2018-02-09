@@ -16,8 +16,8 @@
 	var routes = {
 		init: function(){
 			window.addEventListener("load", function(){
-				var sectionOne = document.querySelector('section:first-of-type')
-				sectionOne.classList.add('active')
+				var start = document.querySelector('section:first-of-type')
+				start.classList.add('active')
 			})
 
 			//what's in the hash? - haschange eventlistener
