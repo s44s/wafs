@@ -15,6 +15,11 @@
 	// Handle routes & state
 	var routes = {
 		init: function(){
+			window.addEventListener("load", function(){
+				var sectionOne = document.querySelector('section:first-of-type')
+				sectionOne.classList.add('active')
+			})
+
 			//what's in the hash? - haschange eventlistener
 			window.addEventListener("hashchange", function(){
 				var route = location.hash
@@ -28,16 +33,24 @@
 	var sections = {
 		hide: function(){
 			var sections = document.querySelectorAll('section')
-			for (var i=0; i < sections.length; i++) {
-				sections[i].classList.remove("active")
-			}
+			// for (var i=0; i < sections.length; i++) {
+			// 	sections[i].classList.remove("active")
+			// }
+			sections.forEach(function(element) {
+				element.classList.remove('active')
+			})
+		},
+
+		show: function (route){
+			// show active section (hash /route)
+			document.querySelector(route).classList.add('active')
 		},
 
 		toggle: function(route){
-			//1. hide all sections
+			// hide all sections
 			this.hide()
-			//2. show active section (hash /route)
-			document.querySelector(route).classList.add('active')
+			// hide all sections
+			this.show(route)
 		}
 	}
 
