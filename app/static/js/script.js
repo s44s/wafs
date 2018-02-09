@@ -16,21 +16,21 @@
     }
   }
 
+
   // Handle routes and states
   var routes = {
     init: function(){
       // whats in the hash? / wat zit er in de link/# ?
-      var route = location.hash
-      sections.toggle(route)
-
-      route != '' ? sections.toggle(route) : window.location.hash = '#start'
+			window.addEventListener('load', function() {
+				var route = location.hash
+				route != '' ? sections.toggle(route) : window.location.hash = '#start'
+			})
 
       window.addEventListener('hashchange', function() {
           sections.toggle(window.location.hash) // pakt de section met de # waar de link (aan het einde) naar veranderd
       })
     }
   }
-
 
   // Render toggle sections
   var sections = {
