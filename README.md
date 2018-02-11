@@ -66,6 +66,8 @@ A single-page application is a web application that interacts with the user by d
 
 [8 - Single-page application vs. multiple-page application](https://neoteric.eu/single-page-application-vs-multiple-page-application)
 
+[9 - Object Oriented Javascript for beginners](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object-oriented_JS)
+
 ***
 
 by [suus](https://github.com/s44s)

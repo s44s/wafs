@@ -15,12 +15,15 @@
 	// Handle routes & state
 	var routes = {
 		init: function(){
+			this.handleEvents()
+		},
+
+		handleEvents: function(){
 			window.addEventListener("load", function(){
 				var start = document.querySelector('section:first-of-type')
 				start.classList.add('active')
 			})
 
-			//what's in the hash? - haschange eventlistener
 			window.addEventListener("hashchange", function(){
 				var route = location.hash
 				sections.toggle(route)
