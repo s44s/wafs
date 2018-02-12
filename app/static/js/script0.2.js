@@ -26,6 +26,7 @@
 				var start = document.querySelector('section:first-of-type')
 				var songs = document.querySelector('#songs')
 				start.classList.add('active')
+				history.pushState("", document.title, window.location.pathname);
 
 			})
 
