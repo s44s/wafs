@@ -15,26 +15,37 @@
 	// Handle routes & state
 	var routes = {
 		init: function(){
-			//implement routie
 
-			request.getData();
+			//2.4 staat routie hier op de juiste plek?
+			routie({
+				'home': function(){
+					request.getData()
+					var route = location.hash
+					template.toggle(route)
+				},
+
+				'songs': function(){
+					console.log('songsss pagina')
+					request.getData()
+					var route = location.hash
+					template.toggle(route)
+				},
+				'songs/ID': function(){
+					//2.5 Zorg ervoor dat je met behulp van de router kan doorlinken naar detail sections van de items uit de lijst met items opgehaald uit de API.
+				}
+			})
 			this.handleEvents()
 		},
 
+		//kan ik de onload hier laten staan?
 		handleEvents: function(){
 			window.addEventListener("load", function(){
 				var start = document.querySelector('section:first-of-type')
 				var songs = document.querySelector('#songs')
 				start.classList.add('active')
-				history.pushState("", document.title, window.location.pathname);
-
+				history.pushState("", document.title, window.location.pathname)
 			})
 
-			window.addEventListener("hashchange", function(){
-				var route = location.hash
-				template.toggle(route)
-				//console.log(location.hash)
-			})
 		}
 	}
 
@@ -44,10 +55,10 @@
 			var searchParams = new URLSearchParams()
 			var search =  {
 				method:'user.gettoptracks',
-				user: 'suustenvoorde',
-				api_key: 'd8454c3a14cf20d91a8213aa468bdb97', //TO DO: hide
+				user: config.user,
+				api_key: config.api_key, //TO DO: hide
 				format: 'json',
-				limit: '10',
+				limit: '5',
 				period: '1month'
 			}
 			Object.keys(search).forEach(key => searchParams.append(key, search[key]))
@@ -64,13 +75,13 @@
 				} else {
 				 // We reached our target server, but it returned an error
 				}
-			};
+			}
 
 			request.onerror = function() {
 				// There was a connection error of some sort
-			};
+			}
 
-			request.send();
+			request.send()
 		}
 	}
 
@@ -82,7 +93,8 @@
 			var songs = document.querySelector('#songs ul')
 			var toptracks = data.toptracks.track
 
-			Transparency.render(songs, toptracks);
+			Transparency.render(songs, toptracks)
+			//3.3 Genereer ook detailsections van de individuele items uit de lijst.
 		},
 		hide: function(){
 			var sections = document.querySelectorAll('section')
