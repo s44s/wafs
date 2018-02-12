@@ -37,7 +37,7 @@
 			this.handleEvents()
 		},
 
-		//kan ik de onload hier laten staan?
+		//2.4 kan ik de onload hier laten staan?
 		handleEvents: function(){
 			window.addEventListener("load", function(){
 				var start = document.querySelector('section:first-of-type')
@@ -45,7 +45,6 @@
 				start.classList.add('active')
 				history.pushState("", document.title, window.location.pathname)
 			})
-
 		}
 	}
 
@@ -56,7 +55,7 @@
 			var search =  {
 				method:'user.gettoptracks',
 				user: config.user,
-				api_key: config.api_key, //TO DO: hide
+				api_key: config.api_key,
 				format: 'json',
 				limit: '5',
 				period: '1month'
@@ -80,7 +79,6 @@
 			request.onerror = function() {
 				// There was a connection error of some sort
 			}
-
 			request.send()
 		}
 	}
