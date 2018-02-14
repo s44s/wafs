@@ -78,3 +78,4 @@ var reduced = numbers.reduce(function(accumalor, item){
 // 	Object.keys(search).forEach(key => searchParams.append(key, search[key]))
 // 	return searchParams.toString()
 // }
+// http://www.html5rocks.com/en/tutorials/es6/promises/
