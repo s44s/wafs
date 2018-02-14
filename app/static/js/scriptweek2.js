@@ -1,7 +1,11 @@
 /* TODO
-	- songs/:id werkend maken
-	- structuur verbeteren
+	- songs/:id werkend maken (dataCollected.id + routie)
+	- template.renderSongsDetail invullen
 	- filter en reduce toepassen
+	- CSS toevoegen
+	- routes.handleEvents() omschrijven naar * van routie
+	- error pagina toevoegen
+
 */
 
 // Initialize application
@@ -27,41 +31,29 @@
 				'home': function(){
 					var route = location.hash
 					template.toggle(route)
-					api.getTrackData()
 				},
 
-				'songs': function(){
+				'songs': function(id){
 					var route = location.hash
 					template.toggle(route)
 
-					api.getData().then(function(data){
-						template.render(data)
-					})//.catch(err)
+					requestTrackData.getData()
+					//.catch(err)
 				},
 
 				'songs/:id': function(id){
-					//dataCollected.id
+					var id
+
 					//2.5 Zorg ervoor dat je met behulp van de router kan doorlinken naar detail sections van de items uit de lijst met items opgehaald uit de API.
 				},
 
 				'*': function() {
 				}
 			})
-			this.handleEvents()
-		},
-
-		//TODO: omschrijven naar * van routie
-		handleEvents: function(){
-			window.addEventListener("load", function(){
-				var start = document.querySelector('section:first-of-type')
-				var songs = document.querySelector('#songs')
-				start.classList.add('active')
-				history.pushState("", document.title, window.location.pathname)
-			})
 		}
 	}
 
-	var api = {
+	var requestUserData = {
 		url: function(){
 			/* https://stackoverflow.com/questions/1714786/query-string-encoding-of-a-javascript-object */
 			var searchParams = new URLSearchParams()
@@ -79,13 +71,13 @@
 		getData: function(){
 			var promise = new Promise(function(resolve, reject){
 				var request = new XMLHttpRequest()
-				request.open('GET', 'http://ws.audioscrobbler.com/2.0/?' + api.url(), true)
+				request.open('GET', 'http://ws.audioscrobbler.com/2.0/?' + requestUserData.url(), true)
 
 				request.onload = function() {
 					if (request.status >= 200 && request.status < 400) {
 						var data = JSON.parse(request.responseText)
 						resolve(data)
-						//dataCollected.allStories(data)
+						// dataCollected.allStories(data)
 					} else {
 					 // We reached our target server, but it returned an error
 					 reject(data)
@@ -99,38 +91,44 @@
 			})
 
 			return promise;
-		},
-		urlTrack: function(artists){
-					/* https://stackoverflow.com/questions/1714786/query-string-encoding-of-a-javascript-object */
-					var array = artists.map(function(item){
-						var searchParams = new URLSearchParams()
-						var search =  {
-							method:'track.getInfo',
-							artist: item.artist,
-							track: item.track,
-							user: config.user,
-							api_key: config.api_key,
-							format: 'json'
-						}
+		}
+	}
 
-						Object.keys(search).forEach(key => searchParams.append(key, search[key]))
-						return searchParams.toString()
+	var requestTrackData = {
+		url: function(artists){
+			/* https://stackoverflow.com/questions/1714786/query-string-encoding-of-a-javascript-object */
+			var array = artists.map(function(item){
+				var searchParams = new URLSearchParams()
+				var search =  {
+					method:'track.getInfo',
+					artist: item.artist,
+					track: item.track,
+					user: config.user,
+					api_key: config.api_key,
+					format: 'json'
+				}
 
-					})
-					return array
+				Object.keys(search).forEach(key => searchParams.append(key, search[key]))
+				return searchParams.toString()
+
+			})
+			return array
 		},
-		getTrackData: function() {
+		getData: function() {
 			//second HTTP request
-			this.getData().then(function(data){
-
-				var allArtist = data.toptracks.track.map(function(element){
+			requestUserData.getData().then(function(data){
+				var allArtist =
+				data.toptracks.track.map(function(element, index){
 					return {
+						id: index,
 						artist: element.artist.name,
-						track: element.name
+						track: element.name,
+						playcount: element.playcount,
+						image: element.image[3][Object.keys(element.image[3])[0]]
 					}
 				})
 
-				var allUrl = api.urlTrack(allArtist)
+				var allUrl = requestTrackData.url(allArtist)
 
 				allUrl.forEach(function(url){
 					var requestTrack = new XMLHttpRequest()
@@ -139,8 +137,8 @@
 					requestTrack.onload = function() {
 						if (requestTrack.status >= 200 && requestTrack.status < 400) {
 							var dataTrack = JSON.parse(requestTrack.responseText)
-							console.log(dataTrack)
-							//dataCollected.allStories(data)
+							dataCollected.allStories(allArtist)
+							dataCollected.id(dataTrack)
 						} else {
 						 // We reached our target server, but it returned an error
 						 reject(data)
@@ -156,28 +154,37 @@
 		}
 	}
 
-
   //map, filter, reduce
-	// var dataCollected = {
-	// 	allStories: function(data){
-	// 		//template.render()
-  //
-	// 	},
-	// 	filter: function(data, keyword) {
-	// 		data.filter(function(item){
-	// 			return item.title.contains(keyword) //contains klopt niet
-	// 		})
-	// 	}
-	// }
+	var dataCollected = {
+		allStories: function(data){
+			template.renderSongs(data)
+			dataCollected.id(data)
+		},
+		id: function(dataTrack){
+			template.renderSongsDetail(dataTrack)
+			// console.log(dataTrack);
+		}
+	}
 
 	// Render / toggle section
 	var template = {
-		render: function (data) {
+		renderSongs: function (data) {
 			var target = document.querySelector('#songs ul')
-			var toptracks = data.toptracks.track
 
-			Transparency.render(target, toptracks)
+			var directives = {
+			  image: {
+			    src: function(params) {
+						 return this.image
+			    }
+			  }
+			}
+
+			Transparency.render(target, data, directives)
+
 			//3.3 Genereer ook detailsections van de individuele items uit de lijst.
+		},
+		renderSongsDetail: function(dataTrack){
+
 		},
 		hide: function(){
 			var sections = document.querySelectorAll('section')
@@ -185,12 +192,10 @@
 				element.classList.remove('active')
 			})
 		},
-
 		show: function (route){
 			// show active section (hash /route)
 			document.querySelector(route).classList.add('active')
 		},
-
 		toggle: function(route){
 			this.hide()
 			this.show(route)
