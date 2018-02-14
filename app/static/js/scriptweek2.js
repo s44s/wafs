@@ -25,7 +25,6 @@
 				},
 
 				'songs': function(){
-					console.log('songsss pagina')
 					request.getData()
 					var route = location.hash
 					template.toggle(route)
@@ -86,8 +85,8 @@
 	// Render / toggle section
 	var template = {
 		render: function (data) {
-			console.log(data)
-			console.log(data.toptracks.track)
+			// console.log(data)
+			// console.log(data.toptracks.track)
 			var songs = document.querySelector('#songs ul')
 			var toptracks = data.toptracks.track
 
