@@ -1,9 +1,8 @@
 /* TODO
 	- songs/:id werkend maken
-	- een tweede HTTP request
-	- map, filter, reduce toepassen
+	- structuur verbeteren
+	- filter en reduce toepassen
 */
-
 
 // Initialize application
 
@@ -24,27 +23,28 @@
 		init: function(){
 
 			routie({
+
 				'home': function(){
 					var route = location.hash
 					template.toggle(route)
 					api.getTrackData()
-
 				},
 
 				'songs': function(){
 					var route = location.hash
 					template.toggle(route)
+
 					api.getData().then(function(data){
 						template.render(data)
-
 					})//.catch(err)
 				},
+
 				'songs/:id': function(id){
 					//dataCollected.id
 					//2.5 Zorg ervoor dat je met behulp van de router kan doorlinken naar detail sections van de items uit de lijst met items opgehaald uit de API.
 				},
-				'*': function() {
 
+				'*': function() {
 				}
 			})
 			this.handleEvents()
@@ -84,12 +84,11 @@
 				request.onload = function() {
 					if (request.status >= 200 && request.status < 400) {
 						var data = JSON.parse(request.responseText)
-						//template.render(data)
 						resolve(data)
 						//dataCollected.allStories(data)
 					} else {
 					 // We reached our target server, but it returned an error
-					 //reject(data)
+					 reject(data)
 					}
 				}
 
@@ -101,22 +100,22 @@
 
 			return promise;
 		},
-		urlTrack: function(artists, tracks){
+		urlTrack: function(artists){
 					/* https://stackoverflow.com/questions/1714786/query-string-encoding-of-a-javascript-object */
-					var array = []
-					artists.forEach(function(item, index){
+					var array = artists.map(function(item){
 						var searchParams = new URLSearchParams()
 						var search =  {
 							method:'track.getInfo',
-							artist: item,
-							track: tracks[index],
+							artist: item.artist,
+							track: item.track,
 							user: config.user,
 							api_key: config.api_key,
 							format: 'json'
 						}
 
 						Object.keys(search).forEach(key => searchParams.append(key, search[key]))
-						array.push(searchParams.toString())
+						return searchParams.toString()
+
 					})
 					return array
 		},
@@ -124,18 +123,14 @@
 			//second HTTP request
 			this.getData().then(function(data){
 
-			var artist = []
-				data.toptracks.track.forEach(function(element) {
-					artist.push(element.artist.name)
+				var allArtist = data.toptracks.track.map(function(element){
+					return {
+						artist: element.artist.name,
+						track: element.name
+					}
 				})
 
-			var trackName = []
-				data.toptracks.track.forEach(function(element) {
-					trackName.push(element.name)
-				})
-
-			var allUrl = api.urlTrack(artist, trackName)
-
+				var allUrl = api.urlTrack(allArtist)
 
 				allUrl.forEach(function(url){
 					var requestTrack = new XMLHttpRequest()
@@ -144,12 +139,11 @@
 					requestTrack.onload = function() {
 						if (requestTrack.status >= 200 && requestTrack.status < 400) {
 							var dataTrack = JSON.parse(requestTrack.responseText)
-							//template.render(data)
 							console.log(dataTrack)
 							//dataCollected.allStories(data)
 						} else {
 						 // We reached our target server, but it returned an error
-						 //reject(data)
+						 reject(data)
 						}
 					}
 
@@ -157,8 +151,6 @@
 						// There was a connection error of some sort
 					}
 					requestTrack.send()
-
-
 				})
 			})
 		}
@@ -181,8 +173,6 @@
 	// Render / toggle section
 	var template = {
 		render: function (data) {
-			console.log(data)
-			// console.log(data.toptracks.track)
 			var target = document.querySelector('#songs ul')
 			var toptracks = data.toptracks.track
 
