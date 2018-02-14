@@ -5,7 +5,7 @@
 	- CSS toevoegen
 	- routes.handleEvents() omschrijven naar * van routie
 	- error pagina toevoegen
-
+	- omschrijven naarES6 https://es6.io/
 */
 
 // Initialize application
