@@ -1,9 +1,9 @@
 /* TODO
 	MUST HAVE:
 	- delay oplossen op detail page
-	- CSS toevoegen
 
 	NICE TO HAVE:
+	- local storage
 	- routes.handleEvents() omschrijven naar * van routie
 	- error pagina toevoegen
 	- omschrijven naar ES6 https://es6.io/
