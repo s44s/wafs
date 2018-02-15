@@ -1,11 +1,12 @@
 /* TODO
-	- songs/:id werkend maken (dataCollected.id + routie)
-	- template.renderSongsDetail invullen
-	- filter en reduce toepassen
+	- reduce toepassen
+	- songs klikbaar door laten linken
+
+	- template.renderSongsDetail volledig invullen
 	- CSS toevoegen
 	- routes.handleEvents() omschrijven naar * van routie
 	- error pagina toevoegen
-	- omschrijven naarES6 https://es6.io/
+	- omschrijven naar ES6 https://es6.io/
 */
 
 // Initialize application
@@ -26,6 +27,7 @@
 	var routes = {
 		init: function(){
 
+			var data;
 			routie({
 
 				'home': function(){
@@ -33,18 +35,32 @@
 					template.toggle(route)
 				},
 
-				'songs': function(id){
+				'songs': function(){
 					var route = location.hash
 					template.toggle(route)
 
-					requestTrackData.getData()
+					if (!data) {
+						requestTrackData.getData().then(function(tracks){
+							data = tracks;
+							dataCollected.allStories(tracks)
+
+							console.log(tracks[0].id)
+							var a = document.querySelector("#songs a")
+							var newhref = window.location.protocol + '//' + window.location.pathname + '#songs/' + tracks[0].id
+							a.setAttribute("href", newhref)
+
+						})
+					}
 					//.catch(err)
 				},
 
 				'songs/:id': function(id){
+					var route = location.hash
+					template.toggleID(route)
 					var id
 
-					//2.5 Zorg ervoor dat je met behulp van de router kan doorlinken naar detail sections van de items uit de lijst met items opgehaald uit de API.
+					requestTrackData.getTrackInfo(id)
+
 				},
 
 				'*': function() {
@@ -77,7 +93,6 @@
 					if (request.status >= 200 && request.status < 400) {
 						var data = JSON.parse(request.responseText)
 						resolve(data)
-						// dataCollected.allStories(data)
 					} else {
 					 // We reached our target server, but it returned an error
 					 reject(data)
@@ -116,41 +131,51 @@
 		},
 		getData: function() {
 			//second HTTP request
-			requestUserData.getData().then(function(data){
-				var allArtist =
-				data.toptracks.track.map(function(element, index){
-					return {
-						id: index,
-						artist: element.artist.name,
-						track: element.name,
-						playcount: element.playcount,
-						image: element.image[3][Object.keys(element.image[3])[0]]
-					}
-				})
-
-				var allUrl = requestTrackData.url(allArtist)
-
-				allUrl.forEach(function(url){
-					var requestTrack = new XMLHttpRequest()
-					requestTrack.open('GET', 'http://ws.audioscrobbler.com/2.0/?' + url, true)
-
-					requestTrack.onload = function() {
-						if (requestTrack.status >= 200 && requestTrack.status < 400) {
-							var dataTrack = JSON.parse(requestTrack.responseText)
-							dataCollected.allStories(allArtist)
-							dataCollected.id(dataTrack)
-						} else {
-						 // We reached our target server, but it returned an error
-						 reject(data)
+			return requestUserData.getData()
+				.then(function(data){
+					var allArtist =
+					data.toptracks.track.map(function(element, index){
+						return {
+							id: index,
+							artist: element.artist.name,
+							track: element.name,
+							playcount: element.playcount,
+							image: element.image[3][Object.keys(element.image[3])[0]]
 						}
-					}
-
-					requestTrack.onerror = function() {
-						// There was a connection error of some sort
-					}
-					requestTrack.send()
+					})
+					return allArtist
 				})
-			})
+		},
+		getTrackInfo: function(id) {
+			this.getData()
+				.then(function(data){
+
+					var data = data.filter(function(el){
+						return Number(el.id) == Number(id)
+					})
+
+					var allUrl = requestTrackData.url(data)
+
+					allUrl.forEach(function(url){
+						var requestTrack = new XMLHttpRequest()
+						requestTrack.open('GET', 'http://ws.audioscrobbler.com/2.0/?' + url, true)
+
+						requestTrack.onload = function() {
+							if (requestTrack.status >= 200 && requestTrack.status < 400) {
+								var dataTrack = JSON.parse(requestTrack.responseText)
+								dataCollected.id(dataTrack)
+							} else {
+							 // We reached our target server, but it returned an error
+							 reject(data)
+							}
+						}
+
+						requestTrack.onerror = function() {
+							// There was a connection error of some sort
+						}
+						requestTrack.send()
+					})
+				}, id)
 		}
 	}
 
@@ -158,11 +183,12 @@
 	var dataCollected = {
 		allStories: function(data){
 			template.renderSongs(data)
-			dataCollected.id(data)
 		},
-		id: function(dataTrack){
-			template.renderSongsDetail(dataTrack)
-			// console.log(dataTrack);
+		id: function(data){
+			template.renderSongsDetail(data)
+		},
+		filter: function(){
+
 		}
 	}
 
@@ -184,7 +210,9 @@
 			//3.3 Genereer ook detailsections van de individuele items uit de lijst.
 		},
 		renderSongsDetail: function(dataTrack){
+			var target = document.querySelector('#songDetail')
 
+			Transparency.render(target, dataTrack.track)
 		},
 		hide: function(){
 			var sections = document.querySelectorAll('section')
@@ -199,6 +227,15 @@
 		toggle: function(route){
 			this.hide()
 			this.show(route)
+		},
+		toggleID: function(route){
+			var sections = document.querySelectorAll('section')
+			sections.forEach(function(element) {
+				element.classList.remove('active')
+			})
+			route = route.substring(0, 5) + 'Detail'
+			document.querySelector(route).classList.add('active')
+
 		}
 	}
 
