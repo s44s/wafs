@@ -79,7 +79,7 @@
 				user: config.user,
 				api_key: config.api_key,
 				format: 'json',
-				limit: '5',
+				limit: '10',
 				period: '1month'
 			}
 			Object.keys(search).forEach(key => searchParams.append(key, search[key]))
@@ -207,7 +207,6 @@
 		},
 		renderSongsDetail: function(dataTrack){
 			var target = document.querySelector('#songDetail')
-			console.log(dataTrack)
 
 			if (typeof dataTrack.track.album != "undefined"){
 				var directives = {
