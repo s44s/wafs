@@ -1,9 +1,9 @@
 /* TODO
-	- reduce toepassen
-	- songs klikbaar door laten linken
-
-	- template.renderSongsDetail volledig invullen
+	MUST HAVE:
+	- delay oplossen op detail page
 	- CSS toevoegen
+
+	NICE TO HAVE:
 	- routes.handleEvents() omschrijven naar * van routie
 	- error pagina toevoegen
 	- omschrijven naar ES6 https://es6.io/
@@ -44,10 +44,11 @@
 							data = tracks;
 							dataCollected.allStories(tracks)
 
-							console.log(tracks[0].id)
-							var a = document.querySelector("#songs a")
-							var newhref = window.location.protocol + '//' + window.location.pathname + '#songs/' + tracks[0].id
-							a.setAttribute("href", newhref)
+							var a = document.querySelectorAll("#songs a")
+							a.forEach(function(element, index){
+								var newhref = window.location.protocol + '//' + window.location.pathname + '#songs/' + index
+								element.setAttribute("href", newhref)
+							})
 
 						})
 					}
@@ -186,9 +187,6 @@
 		},
 		id: function(data){
 			template.renderSongsDetail(data)
-		},
-		filter: function(){
-
 		}
 	}
 
@@ -206,13 +204,22 @@
 			}
 
 			Transparency.render(target, data, directives)
-
-			//3.3 Genereer ook detailsections van de individuele items uit de lijst.
 		},
 		renderSongsDetail: function(dataTrack){
 			var target = document.querySelector('#songDetail')
+			console.log(dataTrack)
 
-			Transparency.render(target, dataTrack.track)
+			if (typeof dataTrack.track.album != "undefined"){
+				var directives = {
+					image: {
+						src: function(params) {
+							return this.album.image[3][Object.keys(this.album.image[3])[0]]
+						}
+					}
+				}
+			}
+
+			Transparency.render(target, dataTrack.track, directives)
 		},
 		hide: function(){
 			var sections = document.querySelectorAll('section')
