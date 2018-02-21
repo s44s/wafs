@@ -29,13 +29,20 @@
 		<section id="songs">
 			<h1>Mijn meest beluisterde songs</h1>
 			<form action="" method="post">
+				<section>
 					<label for="user">Username</label>
-					<input type="text" id="username" name="username" value="suustenvoorde">
+					<input type="text" id="username" name="username">
+				</section>
+				<section>
 					<label for="user">Period</label>
 					<select>
-					  <option value="1month">1 month</option>
-					  <option value="7day">7 days</option>
+						<option value="overall">Overall</option>
+						<option value="12month">1 year</option>
+						<option value="3month">3 months</option>
+						<option value="1month">1 month</option>
+						<option value="7day">7 days</option>
 					</select>
+				</section>
 					<button>Login</button>
 			</form>
 
@@ -53,7 +60,7 @@
 				</a></li>
 			</ul>
 		</section>
-		<section id="songDetail" class="loader">
+		<section id="songDetail">
 			<h1 class="name"></h1>
 			<div class="artist">
 				 <h1 class="name"></h1>

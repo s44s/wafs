@@ -1,7 +1,5 @@
 /* TODO
 	MUST HAVE:
-	- Data management, Filteren & Sorteren (localstorage + filteren op artiesten naam op SONG page)
-	- Feedback naar gebruiker (ERROR wanneer er geen songs zijn + error wanneer de api het niet doet)
 	- Code omzetten naar modules
 
 	- Schrijf een goede readme met features, usage, wishlist en sources
@@ -9,9 +7,8 @@
 	- Flow Diagram checken + in readme plaatsen
 	- Aangeven dat ik gewerkt heb met tweede API https://musicbrainz.org/doc/Development/XML_Web_Service/Version_2
 
-	- CSS toevoegen
-
 	NICE TO HAVE:
+	- CSS toevoegen
 	- omschrijven naar ES6 https://es6.io/
 
 	VRAGEN:
@@ -67,9 +64,6 @@
 
 					getTrackInfo.init(id)
 
-				},
-
-				'*': function() {
 				}
 			})
 		}
@@ -92,6 +86,9 @@
 			this.request(url)
 			.then(getTopTracks.map)
 			.then(dataCollected.topTracks)
+			.catch(function(error){
+				document.querySelector('#songs h1').innerHTML = "API ERROR...."
+			})
 
 		},
 		url: function(username, period){
@@ -123,12 +120,14 @@
 						var data = JSON.parse(request.responseText)
 
 						if(Object.keys(data)[0] === 'error') {
-							console.log('error')
-
-							document.querySelector('#songs h1').innerHTML = "Ah oh.. There are no tracks for the limit you set"
+							document.querySelector('#songs h1').innerHTML = "There is an error"
 							template.renderError(data)
-						} else {
-							// console.log(data)
+						} else if(data.toptracks.track.length == 0) {
+							document.querySelector('#songs h1').innerHTML = "There are no tracks found"
+							template.renderError(data)
+						}
+						else {
+							document.querySelector('#songs h1').innerHTML = "Mijn meest beluisterde songs"
 							resolve(data)
 						}
 					} else {
@@ -168,7 +167,6 @@
 
 	var getTrackInfo = {
 		init: function(id) {
-
 			var data = getTopTracks.topTracksData
 			var specificTrack = getTrackInfo.filter(data, id)
 			var url = this.url(specificTrack)
