@@ -184,8 +184,8 @@
 					method:'track.getInfo',
 					artist: trackData[0].artist,
 					track: trackData[0].track,
-					user: config.user,
-					api_key: config.api_key,
+					user: 'suustenvoorde',
+					api_key: 'd8454c3a14cf20d91a8213aa468bdb97',
 					format: 'json'
 				}
 
