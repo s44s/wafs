@@ -15,7 +15,7 @@ Op zijn minst willen we zien:
 * License?
 
 ##Actor Diagram
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+![alt text](https://github.com/s44s/wafs/blob/week2/app/static/img/actordiagram_final.jpg "Actor Diagram")
 
 ##Interaction Diagram
 
