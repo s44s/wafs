@@ -4,6 +4,15 @@
 }
 
 /* header nav */
+
+.loader {
+    background: white url('../img/loader.gif') no-repeat 50% 50%;
+}
+
+.loader section {
+	opacity: 0;
+}
+
 header nav ul {
 	display: flex;
 	flex-direction: row;
@@ -91,7 +100,7 @@ section h1 {
 	margin-top: -0.25em;
 	padding: 5%;
 	width: 70%;
-	margin-left: 15%;
+	margin-left: 17.25%;
 	text-align: center;
 	color: black;
 	box-shadow: inset 0 0 0 0.2em black;
@@ -99,6 +108,7 @@ section h1 {
 
 #songs ul a {
 	text-decoration: none;
+	color: transparent;
 }
 
 #songs ul li section:hover {
@@ -109,6 +119,52 @@ section h1 {
 #songs ul a {
 	font-family: helvetica;
 }
+
+#songs form {
+	width: 80%;
+	margin-left: 10%;
+
+}
+
+#songs form section {
+	display: block;
+	font-family: helvetica;
+	margin: 0;
+	padding: 0;
+	width: 50%;
+	margin-left: 25%;
+	margin-top: 5%;
+}
+
+#songs form section label {
+	margin-bottom: 5%;
+}
+
+#songs form section input  {
+	padding: 2% 0;
+}
+
+#songs form button {
+	height: 30px;
+	width: 60%;
+	padding: 0;
+	margin-top: 5%;
+	margin-left: 20%;
+	color: rgb(202, 0, 6);
+	font-family: helvetica;
+	font-weight: bold;
+	text-transform: uppercase;
+	text-align: center;
+	list-style: none;
+	border: 0.2em black solid;
+	text-decoration: none;
+}
+
+#songs form button:hover, #songs form button:focus {
+	color: white;
+	background-color: rgb(202, 0, 6);
+}
+
 
 /* detail page */
 #songDetail img {

@@ -28,8 +28,28 @@
 
 		<section id="songs">
 			<h1>Mijn meest beluisterde songs</h1>
+			<form action="" method="post">
+				<section>
+					<label for="user">Username</label>
+					<input type="text" id="username" name="username">
+				</section>
+				<section>
+					<label for="user">Period</label>
+					<select>
+						<option value="overall">Overall</option>
+						<option value="12month">1 year</option>
+						<option value="3month">3 months</option>
+						<option value="1month">1 month</option>
+						<option value="7day">7 days</option>
+					</select>
+				</section>
+					<button>Login</button>
+			</form>
+
 			<ul>
-				<li><a href="">
+				<p class="message"></p>
+
+				<li><a class="id" href="">
 
 						<img class="image" src=""/>
 						<section>
@@ -61,10 +81,14 @@
 		</section>
 
 	</main>
+	<!-- Application modules -->
 	<script src="static/js/config.js"></script>
+
+	<!-- vendor libraries -->
 	<script src="static/js/transparency.min.js"></script>
 	<script src="static/js/routie.js"></script>
 	<script src="static/js/scriptweek2.js"></script>
+	<!-- <script src="static/js/musicbrainz.js"></script> -->
 
 
 </body>

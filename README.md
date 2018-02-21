@@ -4,6 +4,23 @@ The repo for the course 'Web App From Scratch'
 ##
 In the folder 'app' you can find the basic code for a single page web app. Website is live on: [https://s44s.github.io/wafs/app/](https://s44s.github.io/wafs/app/)
 
+Op zijn minst willen we zien:
+* linkToLiveDemo ? review(assignment) : assignGrade(1); We don’t care if this means exposing your API key but we want to see it live on our computer.
+* What does your app do, what’s its purpose (i.e. passing butter) Show, don't (just) tell
+* What do others need to know about how it works
+* Which API does it use and what are the limitations (rate limit)
+* What features does the SPA have
+* What principles/best practices did you follow
+* What would you still like to add (feature wishlist / backlog) (issues)
+* License?
+
+##Actor Diagram
+![alt text](https://github.com/s44s/wafs/blob/week2/app/static/img/actordiagram_final.jpg "Actor Diagram")
+
+##Interaction Diagram
+
+
+
 ## Advantages and disadvantages of JavaScript libraries/frameworks
 In this course we are going to develop a singe page web app with native JavaScript. So no use of jQuery, React or other libraries and/or frameworks. Learn the actual underlying technologies, before learning abstractions. I have listed some pros and cons of using JavaScript libraries;
 

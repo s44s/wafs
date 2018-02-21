@@ -63,6 +63,21 @@ var reduced = numbers.reduce(function(accumalor, item){
 	return accumulator + item //alle waardes bij elkaar op geteld
 })
 
+//voordat je de API aanroept
+app.utilis.loader.show()
+
+//hide in de request (wanneer dit gelukt is)
+app.utilis.loader.show()
+
+app.utils {
+	loader: {
+		show: functino() {
+			app.settings.loader.classList.remove('loader')
+		},
+		hide: functino()
+			app.settings.loader.classList.add('loader')
+	}
+}
 
 // urlTrack: function(){
 // 	/* https://stackoverflow.com/questions/1714786/query-string-encoding-of-a-javascript-object */

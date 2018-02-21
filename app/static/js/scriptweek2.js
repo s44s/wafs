@@ -1,11 +1,14 @@
 /* TODO
 	MUST HAVE:
-	- delay oplossen op detail page
+	- Code omzetten naar modules
+
+	- Schrijf een goede readme met features, usage, wishlist en sources
+	- Interaction Diagram maken + in readme plaatsen
+	- Flow Diagram checken + in readme plaatsen
+	- Aangeven dat ik gewerkt heb met tweede API https://musicbrainz.org/doc/Development/XML_Web_Service/Version_2
 
 	NICE TO HAVE:
-	- local storage
-	- routes.handleEvents() omschrijven naar * van routie
-	- error pagina toevoegen
+	- CSS toevoegen
 	- omschrijven naar ES6 https://es6.io/
 */
 
@@ -19,7 +22,18 @@
 	var app = {
 		init: function(){
 			routes.init()
+			this.eventHandlers()
 			//eventHandlers or global app stuff
+		},
+		eventHandlers: function(){
+			var username = document.querySelector("#songs form input")
+			var submit = document.querySelector("#songs button")
+			var select = document.querySelector("#songs select")
+
+			submit.addEventListener('click', function(e){
+				e.preventDefault()
+				getTopTracks.init(username.value.toString(), select.value)
+			})
 		}
 	}
 
@@ -27,9 +41,7 @@
 	var routes = {
 		init: function(){
 
-			var data;
 			routie({
-
 				'home': function(){
 					var route = location.hash
 					template.toggle(route)
@@ -39,63 +51,84 @@
 					var route = location.hash
 					template.toggle(route)
 
-					if (!data) {
-						requestTrackData.getData().then(function(tracks){
-							data = tracks;
-							dataCollected.allStories(tracks)
-
-							var a = document.querySelectorAll("#songs a")
-							a.forEach(function(element, index){
-								var newhref = window.location.protocol + '//' + window.location.pathname + '#songs/' + index
-								element.setAttribute("href", newhref)
-							})
-
-						})
-					}
-					//.catch(err)
+					getTopTracks.init()
 				},
 
 				'songs/:id': function(id){
 					var route = location.hash
 					template.toggleID(route)
-					var id
 
-					requestTrackData.getTrackInfo(id)
+					getTrackInfo.init(id)
 
-				},
-
-				'*': function() {
 				}
 			})
 		}
 	}
 
-	var requestUserData = {
-		url: function(){
+	var getTopTracks = {
+		init: function(username, period){
+
+			var user = config.user
+			if(username){
+				user = username
+			}
+
+			var periodTime = '1month'
+			if(period){
+				periodTime = period
+			}
+
+			var url = this.url(user, periodTime)
+			this.request(url)
+			.then(getTopTracks.map)
+			.then(dataCollected.topTracks)
+			.catch(function(error){
+				document.querySelector('#songs h1').innerHTML = "API ERROR...."
+			})
+
+		},
+		url: function(username, period){
+
 			/* https://stackoverflow.com/questions/1714786/query-string-encoding-of-a-javascript-object */
 			var searchParams = new URLSearchParams()
 			var search =  {
 				method:'user.gettoptracks',
-				user: config.user,
+				user: username, //'flappahs',
 				api_key: config.api_key,
 				format: 'json',
 				limit: '10',
-				period: '1month'
+				period: period
 			}
 			Object.keys(search).forEach(key => searchParams.append(key, search[key]))
 			return searchParams.toString()
 		},
-		getData: function(){
+		request: function(url){
+			loader.show()
+
 			var promise = new Promise(function(resolve, reject){
 				var request = new XMLHttpRequest()
-				request.open('GET', 'http://ws.audioscrobbler.com/2.0/?' + requestUserData.url(), true)
+
+				request.open('GET', 'http://ws.audioscrobbler.com/2.0/?' + url, true)
 
 				request.onload = function() {
 					if (request.status >= 200 && request.status < 400) {
+						loader.hide()
 						var data = JSON.parse(request.responseText)
-						resolve(data)
+
+						if(Object.keys(data)[0] === 'error') {
+							document.querySelector('#songs h1').innerHTML = "There is an error"
+							template.renderError(data)
+						} else if(data.toptracks.track.length == 0) {
+							document.querySelector('#songs h1').innerHTML = "There are no tracks found"
+							template.renderError(data)
+						}
+						else {
+							document.querySelector('#songs h1').innerHTML = "Mijn meest beluisterde songs"
+							resolve(data)
+						}
 					} else {
 					 // We reached our target server, but it returned an error
+					 console.log('neeeee')
 					 reject(data)
 					}
 				}
@@ -107,18 +140,50 @@
 			})
 
 			return promise;
-		}
-	}
+		},
+		map: function(data) {
+			//second HTTP request
 
-	var requestTrackData = {
-		url: function(artists){
+			var allArtist =
+			data.toptracks.track.map(function(element, index){
+				return {
+					id: index,
+					artist: element.artist.name,
+					track: element.name,
+					playcount: element.playcount,
+					image: element.image[3][Object.keys(element.image[3])[0]]
+				}
+			})
+			getTopTracks.topTracksData = allArtist
+			return allArtist
+
+		},
+		topTracksData: []
+}
+
+	var getTrackInfo = {
+		init: function(id) {
+			var data = getTopTracks.topTracksData
+			var specificTrack = getTrackInfo.filter(data, id)
+			var url = this.url(specificTrack)
+			this.request(url)
+		},
+		filter: function(data, id) {
+
+			var data =
+			data.filter(function(el){
+				return Number(el.id) == Number(id)
+			})
+			return data
+		},
+		url: function(trackData){
 			/* https://stackoverflow.com/questions/1714786/query-string-encoding-of-a-javascript-object */
-			var array = artists.map(function(item){
+			// var array = data.map(function(item){
 				var searchParams = new URLSearchParams()
 				var search =  {
 					method:'track.getInfo',
-					artist: item.artist,
-					track: item.track,
+					artist: trackData[0].artist,
+					track: trackData[0].track,
 					user: config.user,
 					api_key: config.api_key,
 					format: 'json'
@@ -127,72 +192,47 @@
 				Object.keys(search).forEach(key => searchParams.append(key, search[key]))
 				return searchParams.toString()
 
-			})
+			// })
 			return array
 		},
-		getData: function() {
-			//second HTTP request
-			return requestUserData.getData()
-				.then(function(data){
-					var allArtist =
-					data.toptracks.track.map(function(element, index){
-						return {
-							id: index,
-							artist: element.artist.name,
-							track: element.name,
-							playcount: element.playcount,
-							image: element.image[3][Object.keys(element.image[3])[0]]
-						}
-					})
-					return allArtist
-				})
-		},
-		getTrackInfo: function(id) {
-			this.getData()
-				.then(function(data){
+		request: function(url) {
+			loader.show()
 
-					var data = data.filter(function(el){
-						return Number(el.id) == Number(id)
-					})
+				var requestTrack = new XMLHttpRequest()
+				requestTrack.open('GET', 'http://ws.audioscrobbler.com/2.0/?' + url, true)
 
-					var allUrl = requestTrackData.url(data)
+				requestTrack.onload = function() {
+					if (requestTrack.status >= 200 && requestTrack.status < 400) {
+						loader.hide()
+						var dataTrack = JSON.parse(requestTrack.responseText)
+						dataCollected.topTracksDetails(dataTrack)
+					} else {
+					 // We reached our target server, but it returned an error
+					 reject(data)
+					}
+				}
 
-					allUrl.forEach(function(url){
-						var requestTrack = new XMLHttpRequest()
-						requestTrack.open('GET', 'http://ws.audioscrobbler.com/2.0/?' + url, true)
-
-						requestTrack.onload = function() {
-							if (requestTrack.status >= 200 && requestTrack.status < 400) {
-								var dataTrack = JSON.parse(requestTrack.responseText)
-								dataCollected.id(dataTrack)
-							} else {
-							 // We reached our target server, but it returned an error
-							 reject(data)
-							}
-						}
-
-						requestTrack.onerror = function() {
-							// There was a connection error of some sort
-						}
-						requestTrack.send()
-					})
-				}, id)
+				requestTrack.onerror = function() {
+					// There was a connection error of some sort
+				}
+				requestTrack.send()
 		}
 	}
 
   //map, filter, reduce
 	var dataCollected = {
-		allStories: function(data){
-			template.renderSongs(data)
+		topTracks: function(data){
+			template.renderTopTracks(data)
 		},
-		id: function(data){
-			template.renderSongsDetail(data)
+		topTracksDetails: function(data){
+			template.renderTopTracksDetails(data)
 		}
 	}
 
 	// Render / toggle section
 	var template = {
-		renderSongs: function (data) {
+		renderTopTracks: function (data) {
+
 			var target = document.querySelector('#songs ul')
 
 			var directives = {
@@ -200,12 +240,17 @@
 			    src: function(params) {
 						 return this.image
 			    }
-			  }
+			  },
+				id: {
+					href: function(params) {
+						return '#songs/' + this.id
+					}
+				}
 			}
 
 			Transparency.render(target, data, directives)
 		},
-		renderSongsDetail: function(dataTrack){
+		renderTopTracksDetails: function(dataTrack){
 			var target = document.querySelector('#songDetail')
 
 			if (typeof dataTrack.track.album != "undefined"){
@@ -219,6 +264,13 @@
 			}
 
 			Transparency.render(target, dataTrack.track, directives)
+		},
+		renderError: function(data) {
+			var target = document.querySelector('#songs ul')
+			document.querySelector('#songs ul li').style.display = "none"
+
+
+			Transparency.render(target, data)
 		},
 		hide: function(){
 			var sections = document.querySelectorAll('section')
@@ -242,6 +294,15 @@
 			route = route.substring(0, 5) + 'Detail'
 			document.querySelector(route).classList.add('active')
 
+		}
+	}
+
+	var loader =  {
+		show: function() {
+			document.querySelector('main').classList.add('loader')
+		},
+		hide: function() {
+			document.querySelector('main').classList.remove('loader')
 		}
 	}
 
