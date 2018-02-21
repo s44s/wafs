@@ -2,7 +2,7 @@
 The repo for the course 'Web App From Scratch'
 
 ##
-In the folder 'app' you can find the basic code for a single page web app. Website is live on: [https://s44s.github.io/wafs/app/](https://s44s.github.io/wafs/app/)
+In the folder 'app' you can find the basic code for a single page web app. Website is live on: [http://suuscharlotte.nl/MAPPEN/wafs/#home](http://suuscharlotte.nl/MAPPEN/wafs/#home)
 
 Op zijn minst willen we zien:
 * What does your app do, what’s its purpose (i.e. passing butter) Show, don't (just) tell

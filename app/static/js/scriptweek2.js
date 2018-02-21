@@ -3,9 +3,9 @@
 	- Code omzetten naar modules
 
 	- Schrijf een goede readme met features, usage, wishlist en sources
-	- Interaction Diagram maken + in readme plaatsen
-	- Flow Diagram checken + in readme plaatsen
 	- Aangeven dat ik gewerkt heb met tweede API https://musicbrainz.org/doc/Development/XML_Web_Service/Version_2
+
+	- Interaction Diagram maken + in readme plaatsen
 
 	NICE TO HAVE:
 	- CSS toevoegen
