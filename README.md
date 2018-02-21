@@ -14,10 +14,10 @@ Op zijn minst willen we zien:
 * What would you still like to add (feature wishlist / backlog) (issues)
 * License?
 
-* Interaction Diagram
-* Actor Diagram
+##Actor Diagram
+![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
 
-
+##Interaction Diagram
 
 
 

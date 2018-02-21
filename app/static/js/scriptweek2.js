@@ -10,10 +10,6 @@
 	NICE TO HAVE:
 	- CSS toevoegen
 	- omschrijven naar ES6 https://es6.io/
-
-	VRAGEN:
-	- Flow Diagram goed?
-	- Filteren/sorteren hoe moet ik dat toevoegen?
 */
 
 // Initialize application
