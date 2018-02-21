@@ -68,7 +68,7 @@
 	var getTopTracks = {
 		init: function(username, period){
 
-			var user = config.user
+			var user = 'suustenvoorde'
 			if(username){
 				user = username
 			}
@@ -94,7 +94,7 @@
 			var search =  {
 				method:'user.gettoptracks',
 				user: username, //'flappahs',
-				api_key: config.api_key,
+				api_key: 'd8454c3a14cf20d91a8213aa468bdb97',
 				format: 'json',
 				limit: '10',
 				period: period
