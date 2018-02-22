@@ -8,10 +8,12 @@ Op zijn minst willen we zien:
 * What does your app do, what’s its purpose (i.e. passing butter) Show, don't (just) tell
 * What do others need to know about how it works
 * Which API does it use and what are the limitations (rate limit)
+You will implement suitable caching in accordance with the HTTP headers sent with web service responses. You will not make more than 5 requests per originating IP address per second, averaged over a 5 minute period, without prior written consent. You agree to cache similar artist and any chart data (top tracks, top artists, top albums) for a minimum of one week.
 * What features does the SPA have
 * What principles/best practices did you follow
 * What would you still like to add (feature wishlist / backlog) (issues)
 * License?
+* Personal learning curve
 
 ## Actor Diagram
 ![alt text](https://github.com/s44s/wafs/blob/week2/app/static/img/actordiagram_final.jpg "Actor Diagram")
