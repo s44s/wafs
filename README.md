@@ -10,12 +10,12 @@ The app is build with the api of Last.fm. If you want to contribute on this proj
 
 ````
 var search =  {
-method:'user.gettoptracks',
-user: username,
-api_key: config.api_key,
-format: 'json',
-limit: '10',
-period: period
+ method:'user.gettoptracks',
+ user: username,
+ api_key: config.api_key,
+ format: 'json',
+ limit: '10',
+ period: period
 }
 ````
 
