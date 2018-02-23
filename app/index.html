@@ -18,32 +18,30 @@
 	</header>
 	<main>
 		<section id="home">
-			<h1>Check mijn top 5 nummers uit 2018</h1>
-			<p>Telkens wanneer ik deze website open kan ik bekijken wat mijn meest geluisterde
-				nummers zijn. Op detail page kan er meer info gevonden worden over dat specifieke nummer.
-				Zo kun je zien bij welk album het hoort en welke tags eraan zijn gehange.
-			</p>
-			<img src="static/img/Lastfm_logo.png" alt="book"/>
+			<div>
+				<img src="static/img/logo.png" alt="book"/>
+				<h1>Find your top tracks</h1>
+			</div>
 		</section>
 
 		<section id="songs">
-			<h1>Mijn meest beluisterde songs</h1>
-			<form action="" method="post">
-				<section>
-					<label for="user">Username</label>
-					<input type="text" id="username" name="username">
+				<h1>Mijn meest beluisterde songs</h1>
+				<form action="" method="post">
+					<section>
+						<label for="user">Username</label>
+						<input type="text" id="username" name="username" placeholder="Your last.fm username..">
+					</section>
+					<section>
+						<label for="user">Period</label>
+						<select>
+							<option value="overall">Overall</option>
+							<option value="12month">1 year</option>
+							<option value="3month">3 months</option>
+							<option value="1month">1 month</option>
+							<option value="7day">7 days</option>
+						</select>
 				</section>
-				<section>
-					<label for="user">Period</label>
-					<select>
-						<option value="overall">Overall</option>
-						<option value="12month">1 year</option>
-						<option value="3month">3 months</option>
-						<option value="1month">1 month</option>
-						<option value="7day">7 days</option>
-					</select>
-				</section>
-					<button>Login</button>
+					<button>Check</button>
 			</form>
 
 			<ul>
