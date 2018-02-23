@@ -3,6 +3,11 @@ Do you have a Last.fm account and do you wanna know your weekly, monthly of your
 
 [http://suuscharlotte.nl/MAPPEN/wafs/#home](http://suuscharlotte.nl/MAPPEN/wafs/#home)
 
+![alt text](https://github.com/s44s/wafs/blob/week2/app/static/img/screen1.png "Screen")
+
+![alt text](https://github.com/s44s/wafs/blob/week2/app/static/img/screen2.png "Screen")
+
+
 ##
 
 ## How does it work?

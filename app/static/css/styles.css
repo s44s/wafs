@@ -1,6 +1,6 @@
 * {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 /* header nav */
@@ -10,209 +10,270 @@
 }
 
 .loader section {
-	opacity: 0;
+    opacity: 0;
 }
 
 header nav ul {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	list-style: none;
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    list-style: none;
+    width: 50vw;
+    margin-left: 50vw;
 }
 
 header nav a {
-	display: block;
-	height: 5vh;
-	width: 30vw;
-	color: rgb(202, 0, 6);
-	padding-top: 2.5vh;
-	font-family: helvetica;
-	font-weight: bold;
-	text-transform: uppercase;
-	text-align: center;
-	list-style: none;
-	border: 0.2em black solid;
-	text-decoration: none;
+    display: block;
+    color: white;
+    padding-top: 2.5vh;
+    font-family: helvetica;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    list-style: none;
+    text-decoration: none;
 }
 
 header nav ul a:hover, header nav ul a:focus {
-	color: white;
-	background-color: rgb(202, 0, 6);
+    border-bottom: 1px solid white;
 }
 
 /* section .active */
 section {
-	display: none;
-	width: 90vw;
-	margin-left: 5vw;
-	margin-top: 10vh;
+    display: none;
 }
 
 .active {
-	display: block;
+    display: block;
 }
 
 /* homepage */
+#home {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(227, 27, 35);
+}
+
+#home div {
+    width: 90vw;
+    margin-left: 5vw;
+    padding-top: 25vh;
+}
+
+@media screen and (min-width: 50em) {
+    #home div {
+        padding-top: 20vh;
+    }
+}
+
 #home img {
-	width: 50%;
-	margin-left: 25%;
-	margin-top: 5vh;
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 5vh;
 }
 
 #home p {
-	width: 70%;
-	margin-left: 15%;
-	font-family: helvetica;
-	font-size: 1em;
-	text-align: center;
-	margin-top: 5vh;
+    width: 70%;
+    margin-left: 15%;
+    font-family: helvetica;
+    font-size: 1em;
+    text-align: center;
+    margin-top: 5vh;
 }
 
 section h1 {
-	font-family: helvetica;
-	text-align: center;
+    font-family: helvetica;
+    text-align: center;
+    color: white;
+    font-size: 3em;
 }
 
 /* songs page */
-#songs ul {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	list-style: none;
+#songs {
+    width: 100vw !important;
+    margin-left: 0 !important;
+    background-color: #c9c9c9;
 }
 
-#songs ul li {
-	flex-basis: 100%;
-	margin-top: 3em;
-	margin-bottom: 1em;
+#songs div {
+    margin-top: 5%;
+}
+
+#songs h1 {
+    padding-top: 25%;
+    width: 80vw;
+    margin-left: 10vw;
+    font-size: 2em;
+    text-align: left;
+}
+
+@media screen and (min-width: 50em) {
+    #songs h1 {
+        padding-top: 10%;
+    }
+}
+
+#songs ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    list-style: none;
+    width: 80vw !important;
+    margin-left: 10vw !important;
+    margin-top: 5%;
+}
+
+@media screen and (min-width: 50em) {
+    #songs ul li {
+        flex-basis: 50%;
+        margin-top: 3em;
+        margin-bottom: 1em;
+    }
 }
 
 #songs img {
-	width: 70%;
-	margin-left: 15%;
-	margin-bottom: 0;
+    width: 100%;
+    margin-bottom: 0;
 }
 
 #songs ul li section {
-	box-sizing: border-box;
-	display: block;
-	margin: 0;
-	margin-top: -0.25em;
-	padding: 5%;
-	width: 70%;
-	margin-left: 17.25%;
-	text-align: center;
-	color: black;
-	box-shadow: inset 0 0 0 0.2em black;
+    box-sizing: border-box;
+    display: block;
+    margin: 0;
+    margin-top: -0.25em;
+    padding: 5%;
+    width: 100%;
+    text-align: center;
+    color: black;
+    background-color: white;
 }
 
 #songs ul a {
-	text-decoration: none;
-	color: transparent;
+    text-decoration: none;
+    color: transparent;
 }
 
 #songs ul li section:hover {
-	background-color: black;
-	color: white;
+    background-color: black;
+    color: white;
 }
 
 #songs ul a {
-	font-family: helvetica;
+    font-family: helvetica;
 }
 
 #songs form {
-	width: 80%;
-	margin-left: 10%;
+    width: 100%;
+    margin-top: 5%;
 
 }
 
 #songs form section {
-	display: block;
-	font-family: helvetica;
-	margin: 0;
-	padding: 0;
-	width: 50%;
-	margin-left: 25%;
-	margin-top: 5%;
+    display: block;
+    font-family: helvetica;
+    margin: 0;
+    padding: 0;
+    width: 80vw;
+    margin-left: 10vw;
 }
 
 #songs form section label {
-	margin-bottom: 5%;
+    margin-bottom: 5%;
+    text-align: center;
 }
 
 #songs form section input  {
-	padding: 2% 0;
+    padding: 2%;
+}
+
+input[type='text'], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 #songs form button {
-	height: 30px;
-	width: 60%;
-	padding: 0;
-	margin-top: 5%;
-	margin-left: 20%;
-	color: rgb(202, 0, 6);
-	font-family: helvetica;
-	font-weight: bold;
-	text-transform: uppercase;
-	text-align: center;
-	list-style: none;
-	border: 0.2em black solid;
-	text-decoration: none;
+    height: 30px;
+    width: 80vw;
+    padding: 0;
+    margin-top: 5%;
+    margin-left: 10vw;
+    color: black;
+    background-color: white;
+    border:none;
+    font-family: helvetica;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    list-style: none;
+    text-decoration: none;
 }
 
 #songs form button:hover, #songs form button:focus {
-	color: white;
-	background-color: rgb(202, 0, 6);
+    color: white;
+    background-color: black;
 }
 
 
 /* detail page */
+#songDetail {
+    background-color:#c9c9c9;
+}
+
+#songDetail >  h1 {
+    padding-top: 25%;
+}
+
+@media screen and (min-width: 50em) {
+    #songDetail {
+        width: 45vw;
+        margin-left: 27.5vw;
+    }
+}
+
 #songDetail img {
-	width: 70%;
-	margin-bottom: 0;
+    width: 70%;
+    margin-bottom: 0;
 }
 
 .album {
-	text-align: center;
-	font-family: helvetica;
-	margin-top: 5vh;
+    text-align: center;
+    font-family: helvetica;
+    margin-top: 5vh;
 }
 
 .album p {
-	font-style: italic;
-	margin-bottom: 2%;
+    font-style: italic;
+    margin-bottom: 2%;
 }
 
 .toptags {
-	margin-top: 5%;
+    margin-top: 5%;
+    width: 90vw;
 }
 
 .tag {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .tag p {
-	flex-basis: 15%;
-	padding: 2.5%;
-	margin-left: 5%;
-	margin-bottom: 5%;
-	color: white;
-	background-color: black;
-	text-align: center;
+    flex-basis: 15%;
+    padding: 2.5%;
+    margin-left: 5%;
+    margin-bottom: 5%;
+    color: black;
+    background-color: white;
+    text-align: center;
 }
 
 .tag p:hover, .tag p:focus {
-	background-color: rgb(202, 0, 6)
-}
-
-
-@media screen and (min-width: 50em) {
-	section {
-		width: 45vw;
-		margin-left: 27.5vw;
-	}
-
+    background-color: rgb(202, 0, 6)
 }
