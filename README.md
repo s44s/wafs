@@ -1,26 +1,51 @@
-# minor-webdev-wafs
-The repo for the course 'Web App From Scratch'
+# Single Page Web App
+Do you have a Last.fm account and do you wanna know your weekly, monthly of your overall top 10? In this repo you can find the application I made from scratch. The application is based on the api of Last.fm. You can check it out on:
+
+[http://suuscharlotte.nl/MAPPEN/wafs/#home](http://suuscharlotte.nl/MAPPEN/wafs/#home)
 
 ##
-In the folder 'app' you can find the basic code for a single page web app. Website is live on: [http://suuscharlotte.nl/MAPPEN/wafs/#home](http://suuscharlotte.nl/MAPPEN/wafs/#home)
 
-Op zijn minst willen we zien:
-* What does your app do, what’s its purpose (i.e. passing butter) Show, don't (just) tell
-* What do others need to know about how it works
-* Which API does it use and what are the limitations (rate limit)
-You will implement suitable caching in accordance with the HTTP headers sent with web service responses. You will not make more than 5 requests per originating IP address per second, averaged over a 5 minute period, without prior written consent. You agree to cache similar artist and any chart data (top tracks, top artists, top albums) for a minimum of one week.
-* What features does the SPA have
-* What principles/best practices did you follow
-* What would you still like to add (feature wishlist / backlog) (issues)
-* License?
-* Personal learning curve
+## How does it work?
+The app is build with the api of Last.fm. If you want to contribute on this project, please change the properties below. The username and api_key needs to change. You also have the option to change the method, the format and the limit. The period change is build in the Front-end of the application already.
 
-## Actor Diagram
+````
+var search =  {
+ method:'user.gettoptracks',
+ user: username,
+ api_key: config.api_key,
+ format: 'json',
+ limit: '10',
+ period: period
+}
+````
+
+Libraries that are used in this application:
+- [routie.js](http://projects.jga.me/routie/) for the hashchange routing
+- [transparency.js](https://github.com/leonidas/transparency) as a template engine
+
+Furthermore, keep in mind the following limitations. Read more about it on [API Terms of Service](https://www.last.fm/api/tos)
+
+> You will implement suitable caching in accordance with the HTTP headers sent with web service responses. You will not make more than 5 requests per originating IP address per second, averaged over a 5 minute period, without prior written consent. You agree to cache similar artist and any chart data (top tracks, top artists, top albums) for a minimum of one week.
+
+## Features
+In this application you have the possibility to find your (personal) top 10 from a period you have chosen. You can find out some more details about that specific album and about the tags people have given.
+
+## Coming soon..
+Because there are still so many things to add on this application, I'm still working on it. For the future, this application will contain:
+- A local storage option for each song that have been searched for
+- The option to change the top 10 for example to a top 100
+- More information about the artist (I have been looking at a second API to find more information, check [here](https://musicbrainz.org/doc/Development/XML_Web_Service/Version_2)
+- Rewrite the code to ES6
+
+## Actor Diagram and Interaction diagram
+To give you an overview of my application, I made two diagrams, the Actor Diagram and the Interaction diagram.
+
 ![alt text](https://github.com/s44s/wafs/blob/week2/app/static/img/actordiagram_final.jpg "Actor Diagram")
 
-## Interaction Diagram
+![alt text](https://github.com/s44s/wafs/blob/week2/app/static/img/interactiondiagram.jpg "Interaction Diagram")
 
 
+##
 
 ## Advantages and disadvantages of JavaScript libraries/frameworks
 In this course we are going to develop a singe page web app with native JavaScript. So no use of jQuery, React or other libraries and/or frameworks. Learn the actual underlying technologies, before learning abstractions. I have listed some pros and cons of using JavaScript libraries;
@@ -64,6 +89,7 @@ A single-page application is a web application that interacts with the user by d
 * Place external scripts at the bottom of the page
 * Indent your code
 * Commit often & push once
+* Build first, optimize later
 
 ***
 

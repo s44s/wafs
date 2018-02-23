@@ -1,12 +1,10 @@
 /* TODO
 	MUST HAVE:
-	- Schrijf een goede readme met features, usage, wishlist en sources
-	- Aangeven dat ik gewerkt heb met tweede API https://musicbrainz.org/doc/Development/XML_Web_Service/Version_2
-	- Interaction Diagram maken + in readme plaatsen
+	- CSS
+	- Afbeelding van applicatie toevoegen
 
 	NICE TO HAVE:
-	- songs in local storage opslaan
-	- omschrijven naar ES6 https://es6.io/
+	- license?
 */
 
 // Initialize application
