@@ -8,7 +8,8 @@ Do you have a Last.fm account and do you wanna know your weekly, monthly of your
 ## How does it work?
 The app is build with the api of Last.fm. If you want to contribute on this project, please change the properties below. The username and api_key needs to change. You also have the option to change the method, the format and the limit. The period change is build in the Front-end of the application already.
 
-````		var search =  {
+````
+var search =  {
 			method:'user.gettoptracks',
 			user: username,
 			api_key: config.api_key,
