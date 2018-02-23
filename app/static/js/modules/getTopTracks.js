@@ -30,7 +30,7 @@ var getTopTracks = {
 		var searchParams = new URLSearchParams()
 		var search =  {
 			method:'user.gettoptracks',
-			user: username, //'flappahs',
+			user: username,
 			api_key: config.api_key,
 			format: 'json',
 			limit: '10',
